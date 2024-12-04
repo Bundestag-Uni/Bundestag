@@ -26,3 +26,9 @@ In this project we use the API provided by the Bundestag to get speech data and 
 - „Best of Bundestag“: Sammlung witziger oder kurioser Momente, basierend auf Zwischenrufen und Zitaten.
 - „Meistzitierte Politiker“: Wer hat die meisten zitierbaren oder kontroversen Aussagen gemacht?
 - Rekorde: Längste Rede, kürzeste Rede, Sitzung mit den meisten Zwischenrufen etc.
+
+# - To-do
+- Clarify Tech Stack
+- Create Tickets
+- Create Pipeline
+- Configure Repository
