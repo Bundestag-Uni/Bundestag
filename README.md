@@ -32,3 +32,4 @@ In this project we use the API provided by the Bundestag to get speech data and 
 - Create Tickets
 - Create Pipeline
 - Configure Repository
+- Create second Git Repository for Data
