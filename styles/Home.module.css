@@ -1,0 +1,119 @@
+  /*Header*/
+  .header {
+    background: white;
+    color: white;
+    padding: 10px 20px;
+    border-bottom: 2px solid #000;
+    width: 100%;
+  }
+  
+  .logoandtext {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .logo{
+    display: flex; 
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logotext{
+    color: black;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none; 
+    margin: 0;   
+    font-family: sans-serif;
+  }
+
+/*navbar*/
+  .navbar{
+    background:#D9D9D9;
+    color: black;
+    padding: 0.2rem;
+    width: 100%;
+  }
+
+  .navLinks {
+    list-style: none;
+    display: flex;
+    gap: 150px;
+    text-align: center;
+  }
+  
+  .navLinks a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  /*hero*/
+  .hero {
+    background: url('/hero.jpg') no-repeat center center/cover;
+    color: white;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .heroContent h1 {
+    font-size: 2.5rem;
+  }
+  
+  .heroContent p {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .contentGrid {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  /*contentgrid*/
+  .contentGrid h2 {
+    margin-bottom: 2rem;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+  
+  .card {
+    background: #f4f4f4;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .card h3 {
+    margin-bottom: 0.5rem;
+  }
+  /*footer*/
+  .footer {
+    background: #E5E4E2;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.1rem 2rem;
+  }
+  
+  .footer ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .footer a {
+    color: white;
+    text-decoration: none;
+  }
+  
