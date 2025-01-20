@@ -7,7 +7,7 @@ export default function Header() {
     <header className={styles.header}>
       <nav className={styles.logoandtext}>
         <div className={styles.logo}>
-          <Image src='/logo.png' alt='Site Logo' width='75' height='75'></Image>
+          <Image src='/logoTransparent.png' alt='Site Logo' width='75' height='75'></Image>
           <Link href="/" className={styles.logotext}>Deutscher Bundestag (-scraper)</Link>
         </div>
       </nav>

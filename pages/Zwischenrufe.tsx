@@ -14,6 +14,7 @@ export default function Zwischenrufe() {
         <p>Das ist die Seite für Zwischenrufe. Hier werden die Daten für die Zwischenrufe stehen.</p>
         <Hero/>
       </main>
+      <Footer />
     </div>
   );
 }

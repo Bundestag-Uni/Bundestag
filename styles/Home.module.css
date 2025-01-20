@@ -4,7 +4,7 @@
     color: white;
     padding: 10px 20px;
     border-bottom: 2px solid #000;
-    width: 100%;
+    max-width: 100%; 
   }
   
   .logoandtext {
@@ -32,8 +32,11 @@
   .navbar{
     background:#D9D9D9;
     color: black;
-    padding: 0.2rem;
+    padding: 1.5rem;
     width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    border: none;
   }
 
   .navLinks {
@@ -41,6 +44,7 @@
     display: flex;
     gap: 150px;
     text-align: center;
+    justify-content: space-around;
   }
   
   .navLinks a {
@@ -52,8 +56,8 @@
   /*hero*/
   .hero {
     background: url('/hero.jpg') no-repeat center center/cover;
-    color: white;
-    height: 60vh;
+    color: black;
+    height: 548px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,7 +105,7 @@
     color: black;
     font-weight: bold;
     text-align: center;
-    padding: 0.1rem 2rem;
+    padding: 1rem 2rem;
   }
   
   .footer ul {
@@ -116,4 +120,5 @@
     color: white;
     text-decoration: none;
   }
+  
   

@@ -14,6 +14,7 @@ export default function Jucktz() {
             <p>Das ist die Wen Jucktz Seite. Hier werden die Daten für Wen Jucktz stehen.</p>
         <Hero/>
       </main>
+      <Footer />
     </div>
   );
 }

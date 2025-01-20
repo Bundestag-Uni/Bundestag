@@ -14,6 +14,7 @@ export default function Methodik() {
         <p>Das ist die Seite für die Methodik. Hier werden die Daten für die Methodik stehen.</p>
         <Hero/>
       </main>
+      <Footer />
     </div>
   );
 }
