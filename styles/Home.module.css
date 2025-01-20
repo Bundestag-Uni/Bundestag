@@ -120,5 +120,28 @@
     color: white;
     text-decoration: none;
   }
-  
-  
+  .zwischenrufpersonen {
+    width: 50%;
+    height: 50%;
+    border: 2px solid #ccc;
+    margin: 20px auto;
+  }
+
+  .diagram-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+  .grid-header{
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 20px;
+    text-align: center;
+  }
+  .grid-item {
+    height: 70vh;
+  }
+  .diagramquestion{
+    font-size: xx-large;
+    font-family: sans-serif;
+    padding-left: 50px;
+  }
