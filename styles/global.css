@@ -1,9 +1,9 @@
 * {
     padding: 0;
     box-sizing: border-box;
-    overflow-x: hidden;
     max-width: 100%;
     margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
   }
   
   .body {
