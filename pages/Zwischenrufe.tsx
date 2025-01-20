@@ -18,7 +18,7 @@ export default function Zwischenrufe() {
       <Navbar />
 
       <main>
-        <h1 class='Home-module__g21JLG__diagramquestion'>Wer ruft am meisten dazwischen?</h1>
+        <h1 class='Home-module__g21JLG__diagramquestion'>Bei wem wird am meisten dazwischen gerufen?</h1>
 
         {/* Grid-Container mit eindeutigem Klassennamen */}
         <div className="Home-module__g21JLG__diagram-grid">
@@ -35,7 +35,7 @@ export default function Zwischenrufe() {
             <ParteienDiagramm />
           </div>
         </div>
-
+        <hr class="Home-module__g21JLG__spacer" />
         <h1 class='Home-module__g21JLG__diagramquestion'>Wer ruft am meisten dazwischen?</h1>
         {/* Grid-Container mit eindeutigem Klassennamen */}
         <div className="Home-module__g21JLG__diagram-grid">
@@ -52,8 +52,6 @@ export default function Zwischenrufe() {
             <ParteienDiagramm />
           </div>
         </div>
-        <h1 class='Home-module__g21JLG__diagramquestion'>TODO</h1>
-        <Hero />
       </main>
       <Footer />
     </div>
