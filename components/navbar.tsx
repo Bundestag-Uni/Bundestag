@@ -1,17 +1,27 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router'; // useRouter importieren
 import styles from '../styles/Home.module.css';
 
 export default function Navbar() {
+  const router = useRouter(); // Router-Objekt erhalten
+
   return (
-      <nav className={styles.navbar}>
-        <ul className={styles.navLinks}>
-          <li><Link href="/">Home</Link></li>
-          <li><Link href="/Jucktz">Wen Jucktz</Link></li>
-          <li><Link href="/Yap">Yap-o-Meter</Link></li>
-          <li><Link href="/Zwischenrufe">Zwischenrufe</Link></li>
-          <li><Link href="/Methodik">Methodik</Link></li>
-        </ul>
-      </nav>
-    
+    <nav className={styles.navbar}>
+      <ul className={styles.navLinks}>
+        {[
+          { href: "/", label: "Home" },
+          { href: "/Jucktz", label: "Wen Jucktz" },
+          { href: "/Yap", label: "Yap-o-Meter" },
+          { href: "/Zwischenrufe", label: "Zwischenrufe" },
+          { href: "/Methodik", label: "Methodik" },
+        ].map(({ href, label }) => (
+          <li key={href}>
+            <Link href={href} className={router.pathname === href ? styles.activeLink : ""}>
+              {label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
