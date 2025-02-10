@@ -226,3 +226,87 @@ html {
     grid-template-columns: 1fr;
   }
 }
+.searchChartContainer {
+  /* Optisches Gesamt-Layout */
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 80%;
+    background: var(--background-light);
+    border-radius: 20px;
+}
+
+.searchChartTitle {
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: sans-serif;
+  margin-bottom: 1rem;
+}
+
+.searchChartControls {
+  /* Zeile für Input + Button */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.searchChartInput {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.searchChartButton {
+  padding: 0.5rem 1rem;
+  background: #82ca9d; 
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.searchChartButton:hover {
+  background-color: #72ba8d; /* dunklerer Grünton */
+}
+
+.searchChartChart {
+  width: 100%;
+  height: 400px; 
+  margin-top: 1rem;
+}
+
+.bubble-tooltip {
+  /* Dunkelgrün mit transparenter Deckkraft */
+  background-color: rgba(60, 120, 90, 0.8);
+  
+  /* Weiße Schrift */
+  color: #fff;
+  
+  /* Etwas Innenabstand und abgerundete Ecken */
+  padding: 8px 12px;
+  border-radius: 8px;
+  
+  /* Einheitliche Schrift */
+  font-family: sans-serif;
+  font-size: 1rem;
+  
+  /* Verhindert Mouse-Events, damit es nicht flackert */
+  pointer-events: none;
+  
+  /* Leichter Schatten */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  max-width: 200px; /* optional */
+}
+
+.bubble-tooltip p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Falls du zwischen den Zeilen einen kleinen Abstand möchtest: */
+.bubble-tooltip p + p {
+  margin-top: 4px;
+}

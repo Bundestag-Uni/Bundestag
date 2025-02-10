@@ -2,9 +2,11 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import Hero from '../components/hero';
 import Header from '../components/header';
-import PersonenDiagramm from '../components/p5-scripte/zwischenrufer';
-import ParteienDiagramm from '../components/p5-scripte/parteien';
-
+import PersonenDiagrammRufer from '../components/p5-scripte/zwischenruferZ';
+import PersonenDiagrammRedner from '../components/p5-scripte/zwischenruferR';
+import ParteienDiagrammRufer from '../components/p5-scripte/parteienZ';
+import ParteienDiagrammRedner from '../components/p5-scripte/parteienR';
+import SearchChart from '../components/diagramme/SearchChart';
 
 export default function Zwischenrufe() {
   return (
@@ -18,9 +20,10 @@ export default function Zwischenrufe() {
       <Navbar />
 
       <main>
-        <h1 class='Home-module__g21JLG__diagramquestion'>Bei wem wird am meisten dazwischen gerufen?</h1>
+        <h1 className='Home-module__g21JLG__diagramquestion'>
+          Wer ruft am meisten dazwischen?
+        </h1>
 
-        {/* Grid-Container mit eindeutigem Klassennamen */}
         <div className="Home-module__g21JLG__diagram-grid">
           <div className="Home-module__g21JLG__grid-header">
             <h2>Personen</h2>
@@ -29,15 +32,18 @@ export default function Zwischenrufe() {
             <h2>Partei</h2>
           </div>
           <div className="Home-module__g21JLG__grid-item">
-            <PersonenDiagramm />
+            <PersonenDiagrammRufer />
           </div>
           <div className="Home-module__g21JLG__grid-item">
-            <ParteienDiagramm />
+            <ParteienDiagrammRufer />
           </div>
         </div>
-        <hr class="Home-module__g21JLG__spacer" />
-        <h1 class='Home-module__g21JLG__diagramquestion'>Wer ruft am meisten dazwischen?</h1>
-        {/* Grid-Container mit eindeutigem Klassennamen */}
+
+        <hr className="Home-module__g21JLG__spacer" />
+
+        <h1 className='Home-module__g21JLG__diagramquestion'>
+          Bei wem wird am meisten dazwischen gerufen?
+        </h1>
         <div className="Home-module__g21JLG__diagram-grid">
           <div className="Home-module__g21JLG__grid-header">
             <h2>Personen</h2>
@@ -46,13 +52,21 @@ export default function Zwischenrufe() {
             <h2>Partei</h2>
           </div>
           <div className="Home-module__g21JLG__grid-item">
-            <PersonenDiagramm />
+            <PersonenDiagrammRedner />
           </div>
           <div className="Home-module__g21JLG__grid-item">
-            <ParteienDiagramm />
+            <ParteienDiagrammRedner />
           </div>
         </div>
+        <hr className="Home-module__g21JLG__spacer" />
+        <h1 className='Home-module__g21JLG__diagramquestion'>Such selbst!</h1>
+        <SearchChart />
+        <hr
+          className="Home-module__g21JLG__spacer"
+          style={{ border: 'none' }}
+        />
       </main>
+
       <Footer />
     </div>
   );
