@@ -8,28 +8,28 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
-    responsive: [
-      {
-        breakpoint: 1300,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
-      {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+    // responsive: [
+    //   {
+    //     breakpoint: 1300,
+    //     settings: {
+    //       slidesToShow: 2,
+    //       slidesToScroll: 1,
+    //       initialSlide: 1,
+    //     },
+    //   },
+    //   {
+    //     breakpoint: 800,
+    //     settings: {
+    //       slidesToShow: 1,
+    //       slidesToScroll: 1,
+    //     },
+    //   },
+    // ],
   };
   
   function Arrow(props) {
@@ -51,11 +51,10 @@ const settings = {
   const Gallery = () => {
     return (
       <div
-        className={classes.container}
         style={{
-          marginTop: "5.3rem",
+          marginTop: "2rem",
           backgroundColor: "transparent",
-          padding: "5rem",
+          padding: "4rem",
         }}
       >
         <Slider
@@ -70,88 +69,16 @@ const settings = {
               className={classes.gallery1}
               onMouseOver={() => {
                 console.log("HOVER");
-              }}
-            >
+              }}>
               <p>
-                Sublime Replenishing Night Masque
-              </p>
-              <p className={classes.paragraph}>
-                Richly nourishing hydration for overnight use
+                Slide1
               </p>
             </div>
           </div>
           <div>
-            <div className={classes.gallery1}>
-              <img
-                className={classes.galleryImg2}
-                alt="Img 2"
-              ></img>
-              <a href="#" className={classes.btnGallery}>
-                Rōzu Eau de Parfum
-              </a>
-              <p className={classes.paragraph}>Floral, Green and Woody</p>
-            </div>
-          </div>
-          <div>
-            <div className={classes.gallery1}>
-              <img
-                className={classes.galleryImg3}
-                alt="Img 3"
-              ></img>
-              <a href="#" className={classes.btnGallery}>
-                The Chance Companion
-              </a>
-              <p className={classes.paragraph}>
-                For fragnant, soft skin neck-to-toe
-              </p>
-            </div>
-          </div>
-          <div>
-            <div className={classes.gallery1}>
-              <img
-                className={classes.galleryImg4}
-                alt="Img 4"
-              ></img>
-              <a href="#" className={classes.btnGallery}>
-                Aganice Aromatique Candle
-              </a>
-              <p className={classes.paragraph}>Cardamom, Mimosa, Tobacco</p>
-            </div>
-          </div>
-          <div>
-            <div className={classes.gallery1}>
-              <img
-                className={classes.galleryImg5}
-                alt="Img 5"
-              ></img>
-              <a href="#" className={classes.btnGallery}>
-                Parsley Seed Extented Anti-Oxidant Skin Care Kit
-              </a>
-              <p className={classes.paragraph}>
-                Delivers potent doses of anti-oxidants
-              </p>
-            </div>
-          </div>
-          <div>
-            <div className={classes.gallery1}>
-              <img
-                className={classes.galleryImg6}
-                alt="Img 6"
-              ></img>
-              <a href="#" className={classes.btnGallery}>
-                Rose Hair & Scalp Moisturising Masque
-              </a>
-              <p className={classes.paragraph}>
-                Maintain scalp and hair in peak condition
-              </p>
-            </div>
-          </div>
-          <div className={classes.gallery1}>
-            <img className={classes.galleryImg7} alt="Img 7"></img>
-            <a href="#" className={classes.btnGallery}>
-              Resurrection Duet
-            </a>
-            <p className={classes.paragraph}>Cleanse and nourish the hands</p>
+            <p>
+              Slide2
+            </p>
           </div>
         </Slider>
       </div>
