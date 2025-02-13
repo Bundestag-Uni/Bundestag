@@ -79,6 +79,18 @@ export default async function handler(req, res) {
         values = [`%${finalTerm}%`]; // '%Suchbegriff%' oder '%%' bei leer
         break;
 
+      case 'findPartyById':
+      queryText = `
+        SELECT a.partei_kurz, COUNT(*) AS anzahl
+        FROM zwischenruf z
+        JOIN abgeordnete a ON z.zwischenrufer_id = a.id
+        WHERE a.id = $1
+        GROUP BY a.partei_kurz
+      `;
+      values = [searchTerm];
+      break;
+
+
       default:
         return res.status(400).json({ error: 'Invalid query type' });
     }
