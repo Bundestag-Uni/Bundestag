@@ -80,16 +80,72 @@ export default async function handler(req, res) {
         break;
 
       case 'findPartyById':
-      queryText = `
-        SELECT a.partei_kurz, COUNT(*) AS anzahl
-        FROM zwischenruf z
-        JOIN abgeordnete a ON z.zwischenrufer_id = a.id
-        WHERE a.id = $1
-        GROUP BY a.partei_kurz
-      `;
-      values = [searchTerm];
-      break;
+        queryText = `
+          SELECT a.partei_kurz, COUNT(*) AS anzahl
+          FROM zwischenruf z
+          JOIN abgeordnete a ON z.zwischenrufer_id = a.id
+          WHERE a.id = $1
+          GROUP BY a.partei_kurz
+        `;
+        values = [searchTerm];
+        break;
 
+      case 'getNameSuggestions':
+        queryText = `
+          SELECT id, vorname, nachname
+          FROM abgeordnete
+          WHERE
+            CONCAT(vorname, ' ', nachname) ILIKE $1 || '%' 
+            OR CONCAT(nachname, ' ', vorname) ILIKE $1 || '%'
+          ORDER BY nachname, vorname
+          LIMIT 10;
+        `;
+        values = [searchTerm];
+        break;
+  
+      case 'getPersonData':
+        queryText = `
+          SELECT
+            a.id,
+            a.anrede_titel,
+            a.akad_titel,
+            a.vorname,
+            a.nachname,
+            to_char(a.geburtsdatum, 'DD.MM.YYYY') AS geburtsdatum,
+            to_char(a.sterbedatum, 'DD.MM.YYYY') AS sterbedatum,
+            a.geschlecht,
+            a.geburtsort,
+            a.familienstand,
+            a.religion,
+            a.beruf,
+            a.partei_kurz,
+            (SELECT COUNT(*) FROM zwischenruf z WHERE z.zwischenrufer_id = a.id) AS zwischenrufe_count,
+            (SELECT COUNT(*) FROM reden r WHERE r.redner_id = a.id) AS reden_count,
+            (
+              SELECT ARRAY(
+                SELECT row_to_json(z)
+                FROM (
+                  SELECT inhalt, rede_id
+                  FROM zwischenruf z
+                  WHERE z.zwischenrufer_id = a.id
+                ) z
+              )
+            ) AS zwischenrufe
+          FROM abgeordnete a
+          WHERE a.id = $1;
+        `;
+        values = [searchTerm];
+        break;
+
+      case 'getRedeFromZwischenruf':
+        queryText = `
+          SELECT
+          a.vorname, a.nachname, a.partei_kurz, r.inhalt
+          FROM reden as r, abgeordnete as a
+          WHERE r.redner_id = a.id and r.id  = $1;
+        `;
+        values = [searchTerm];
+        break;
 
       default:
         return res.status(400).json({ error: 'Invalid query type' });

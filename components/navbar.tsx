@@ -10,7 +10,7 @@ export default function Navbar() {
       <ul className={styles.navLinks}>
         {[
           { href: "/", label: "Home" },
-          { href: "/Jucktz", label: "Wen Jucktz" },
+          { href: "/Personensuche", label: "Personensuche" },          
           { href: "/Yap", label: "Yap-o-Meter" },
           { href: "/Zwischenrufe", label: "Zwischenrufe" },
           { href: "/Methodik", label: "Methodik" },
