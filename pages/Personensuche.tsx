@@ -293,7 +293,7 @@ export default function Personensuche() {
                           <strong>
                             {beispielRede.vorname} {beispielRede.nachname} ({beispielRede.partei_kurz})
                           </strong>
-                          : {truncateText(beispielRede.inhalt, 1500)}
+                          : {truncateText(beispielRede.inhalt, 1200)}
                         </p>
                       )}
                     </>
