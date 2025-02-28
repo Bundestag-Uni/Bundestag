@@ -107,10 +107,10 @@ export default function Personensuche() {
       fetchRedeFromZwischenruf(chosenZwischenruf.rede_id);
     }
   }
-  // Beim ersten Laden: Standard-Person (z.B. Unser Hero BRANDNERRRRRRRR)
+  // Beim ersten Laden: Standard-Person (z.B. Olaf Scholz)
   useEffect(() => {
     if (!selectedPerson) {
-      const defaultId = '11004678'; // bitte anpassen
+      const defaultId = '11003231'; // bitte anpassen
       fetchPersonData(defaultId);
     }
   }, []);
@@ -165,24 +165,13 @@ export default function Personensuche() {
             className="Home-module__g21JLG__suchbar"
           />
           {suggestions.length > 0 && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '100%',
-                left: 0,
-                width: '100%',
-                zIndex: 10000,
-                backgroundColor: '#fff',
-                border: '1px solid #ccc',
-                boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
-              }}
-            >
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            <div className="Home-module__g21JLG__suggestionContainer">
+              <ul className="Home-module__g21JLG__suggestionList">
                 {suggestions.map((person) => (
                   <li
                     key={person.id}
                     onClick={() => handleSuggestionClick(person)}
-                    className="Home-module__g21JLG__suchvorschlag"
+                    className="Home-module__g21JLG__suggestionItem"
                   >
                     {person.vorname} {person.nachname}
                   </li>
