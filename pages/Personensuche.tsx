@@ -107,10 +107,10 @@ export default function Personensuche() {
       fetchRedeFromZwischenruf(chosenZwischenruf.rede_id);
     }
   }
-  // Beim ersten Laden: Standard-Person (z.B. Olaf Scholz)
+  // Beim ersten Laden: Standard-Person (z.B. Unser Hero BRANDNERRRRRRRR)
   useEffect(() => {
     if (!selectedPerson) {
-      const defaultId = '11003231'; // bitte anpassen
+      const defaultId = '11004678'; // bitte anpassen
       fetchPersonData(defaultId);
     }
   }, []);
