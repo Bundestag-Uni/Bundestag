@@ -317,29 +317,39 @@ html {
 .suchbar:hover {
   border-color: var(--background-medium);
 }
-
-/* Vorschlagsliste (Container) */
-.suchvorschlagContainer {
+.suggestionContainer {
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
-  background-color: var(--secondary-color);
-  border: 0.0625rem solid var(--background-dark);
-  box-shadow: 0 0.125rem 0.375rem var(--background-dark);
   z-index: 10000;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 0.5rem; /* Abgerundete Ecken */
+  margin-top: 0.25rem; /* Kleiner Abstand zum Input-Feld */
+  overflow: hidden; /* Damit abgerundete Ecken wirken */
 }
 
-/* Einzelner Vorschlag */
-.suchvorschlag {
-  padding: calc(var(--spacing-base) * 0.5);
-  border-bottom: 0.0625rem solid var(--background-medium);
+.suggestionList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.suggestionItem {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee; /* Trennlinie */
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
-.suchvorschlag:hover {
-  background-color: var(--background-light);
+.suggestionItem:last-child {
+  border-bottom: none; /* Kein Strich beim letzten Element */
+}
+
+.suggestionItem:hover {
+  background-color: #f2f2f2;
 }
 
 /* Layout für Personendaten */
