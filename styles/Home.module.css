@@ -1,17 +1,3 @@
-:root {
-  --primary-color: black;
-  --secondary-color: white;
-  --background-light: #f2f2f2;
-  --background-medium: #bcbaba;
-  --background-dark: #6f6f6f;
-  --font-size-base: 16px;
-  --spacing-base: 1rem;
-  --accent-color: #ad8e02;
-}
-
-html {
-  font-size: var(--font-size-base);
-}
 .spacer{
     height: 2px;
     background-color: var(--background-light);
@@ -58,6 +44,7 @@ html {
   margin: 0;
   border: none;
 }
+
 .navLinks {
   list-style: none;
   display: flex;
@@ -135,7 +122,6 @@ html {
   margin-bottom: 0.5rem;
 }
 
-
 .footer {
   background: var(--background-dark);
   color: var(--primary-color);
@@ -158,7 +144,7 @@ html {
   text-decoration: none;
 }
 
-.diagram-grid {
+.diagramGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
@@ -168,7 +154,7 @@ html {
   justify-content: center;
 }
 
-.grid-header {
+.gridHeader {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   font-size: 1.5rem;
   font-weight: bold;
@@ -181,7 +167,7 @@ html {
   border-radius: 20px;
 }
 
-.grid-item {
+.gridItem {
   background: var(--background-light);
   padding: 15px;
   text-align: center;
@@ -201,7 +187,6 @@ html {
   grid-column: span 2;
 }
 
-
 @media (max-width: 768px) {
   .navLinks {
     flex-direction: column;
@@ -217,10 +202,11 @@ html {
     grid-template-columns: 1fr;
   }
 
-  .diagram-grid {
+  .diagramGrid {
     grid-template-columns: 1fr;
   }
 }
+
 .searchChartContainer {
   
     margin: 2rem auto;
@@ -273,7 +259,7 @@ html {
   margin-top: 1rem;
 }
 
-.bubble-tooltip {
+.bubbleTooltip {
   background-color: rgba(60, 120, 90, 0.8);
   color: #fff;
   padding: 8px 12px;
@@ -285,17 +271,15 @@ html {
   max-width: 200px; 
 }
 
-.bubble-tooltip p {
+.bubbleTooltip p {
   margin: 0;
   line-height: 1.4;
 }
 
-
-.bubble-tooltip p + p {
+.bubbleTooltip p + p {
   margin-top: 4px;
 }
 
-/* Suchfeld */
 .suchbar {
   width: 100%;
   padding: calc(var(--spacing-base) * 0.75) calc(var(--spacing-base) * 2.5);
@@ -310,13 +294,14 @@ html {
 .suchbar:focus {
   outline: none;
   border-color: var(--background-medium);
-  /* Leichter Fokus-Ring */
+  
   box-shadow: 0 0 0 0.1875rem var(--background-medium);
 }
 
 .suchbar:hover {
   border-color: var(--background-medium);
 }
+
 .suggestionContainer {
   position: absolute;
   top: 100%;
@@ -326,9 +311,9 @@ html {
   background-color: #fff;
   border: 1px solid #ccc;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  border-radius: 0.5rem; /* Abgerundete Ecken */
-  margin-top: 0.25rem; /* Kleiner Abstand zum Input-Feld */
-  overflow: hidden; /* Damit abgerundete Ecken wirken */
+  border-radius: 0.5rem; 
+  margin-top: 0.25rem; 
+  overflow: hidden; 
 }
 
 .suggestionList {
@@ -339,20 +324,19 @@ html {
 
 .suggestionItem {
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #eee; /* Trennlinie */
+  border-bottom: 1px solid #eee; 
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .suggestionItem:last-child {
-  border-bottom: none; /* Kein Strich beim letzten Element */
+  border-bottom: none; 
 }
 
 .suggestionItem:hover {
   background-color: #f2f2f2;
 }
 
-/* Layout für Personendaten */
 .layoutContainer {
   display: flex;
   align-items: stretch;
@@ -363,7 +347,6 @@ html {
 }
 
 .visitenkarte {
-  /* Dein bestehendes Styling */
   flex: 0 0 40%;
   text-align: left;
   border: 0.0625rem solid var(--background-dark);
@@ -371,61 +354,78 @@ html {
   border-radius: 0.5rem;
   box-shadow: 0 0.125rem 0.375rem var(--background-dark);
   background-color: var(--secondary-color);
-  
-  /* Flexbox & Spacing */
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-base);
   width: 100%;
-  max-width: 40rem; /* Anpassen, falls gewünscht */
+  max-width: 40rem; 
 }
 
 .visitenkarte h1 {
   margin-bottom: calc(var(--spacing-base) * 0.5);
   padding: calc(var(--spacing-base) * 0.5) var(--spacing-base);
-  color: var(--accent-color);
   border-bottom: 0.0625rem solid var(--background-medium);
+  color: var(--accent-color);
+  font-size: 2rem;
 }
 
-/* Definition List */
-.visitenkarte-datalist {
+.visitenkarteInner {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.imageContainer {
+  flex-shrink: 0;
+}
+
+.visitenkarteDatalist {
   margin: 0;
   padding: 0;
+  width: 100%;
+  border-radius: 4px;
 }
 
-/* Jede Zeile */
-.data-row {
-  /* Grid-Layout für dt (links) und dd (rechts) */
+.dataRow {
   display: grid;
   grid-template-columns: minmax(8rem, auto) 1fr;
   align-items: center; 
-  padding: var(--spacing-base) var(--spacing-base);
+  padding: var(--spacing-base);
+  margin: 0;
 }
 
-/* Alternierender Hintergrund für die ganze Zeile */
-.data-row:nth-of-type(odd) {
+.dataRow:nth-of-type(odd) {
   background-color: var(--background-light);
 }
-.data-row:nth-of-type(even) {
+
+.dataRow:nth-of-type(even) {
   background-color: var(--secondary-color);
 }
 
-/* dt = Label */
-.data-row dt {
+.dataRow dt {
   font-weight: bold;
   margin: 0;
   color: var(--primary-color);
-  /* Optional: etwas Abstand zum rechten Rand */
-  padding-right: 0.5rem;
+  padding-right: 0.5rem; 
 }
 
-/* dd = Wert */
-.data-row dd {
+.dataRow dd {
   margin: 0;
   color: var(--primary-color);
 }
 
-/* Kleine Info-Boxen */
+.profilePicture {
+  display: block;
+  width: 20rem;
+  height: auto;
+  border-radius: 4px;
+  object-fit: cover;
+  min-height: 8rem;
+}
+
+.profilePictureCaption {
+  
+  text-align: left;
+  margin: 0.5rem 0 0 0;
+}
+
 .smallinfobox {
   flex: 1;
   border: 0.0625rem solid var(--background-dark);
@@ -435,20 +435,20 @@ html {
   background-color: var(--secondary-color);
   text-align: left;
 }
-/* Label oben rechts */
+
 .smallinfobox-label {
   font-weight: bold;
-  font-size: 0.9rem; /* Anpassen, falls kleiner Text gewünscht */
+  font-size: 0.9rem; 
   color: #000;
 }
 
-/* Große Zahl in der Mitte */
-.smallinfobox-count {
-  font-size: 2rem; /* Zahl schön groß */
+
+.smallinfoboxCount {
+  font-size: 2rem; 
   font-weight: bold;
   color: #333;
 }
-/* Größere Beispielbox */
+
 .examplebox {
   flex: 1;
   border: 0.0625rem solid var(--background-dark);
@@ -460,7 +460,7 @@ html {
   display: flex;
   flex-direction: column;
 }
-/* Beispiel: Hauptcontainer */
+
 .exampleContainer {
   border: 2px solid black;
   padding: 1rem;
@@ -471,7 +471,6 @@ html {
   margin: 0 auto;
 }
 
-/* Titelzeile */
 .exampleHeader {
   display: flex;
   justify-content: space-between;
@@ -482,7 +481,6 @@ html {
   margin-bottom: 1rem;
 }
 
-/* Button-Basis */
 .refreshButton {
   background: var(--accent-color);
   border: 2px solid black;
@@ -495,21 +493,18 @@ html {
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
-  text-transform: uppercase; /* Nur als Stil-Variante */
+  text-transform: uppercase; 
 }
 
-/* Leichte Vergrößerung + Schatten bei Hover */
 .refreshButton:hover {
   transform: scale(1.05);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Kleiner "Push-in"-Effekt bei Klick */
 .refreshButton:active {
   transform: scale(0.95);
 }
 
-/* "Wave"-Effekt mit radial-gradient */
 .refreshButton::before {
   content: "";
   position: absolute;
@@ -525,34 +520,72 @@ html {
   border-radius: 50%;
 }
 
-/* Bei Hover: größer und sichtbar */
 .refreshButton:hover::before {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
 
-/* Innerer Container für Zwischenruf + Antwort */
 .exampleInnerBox {
   white-space: pre-wrap;
   padding: 0.5rem;
 }
 
-/* Abstand, wenn wir darunter ein weiteres Element haben (z. B. zweiter Absatz) */
 .exampleParagraph {
   margin-top: 1rem;
   margin-bottom: 0;
 }
 
-/* Footer-Bereich */
 .exampleFooter {
   margin-top: auto;
   border-top: 1px solid black;
   padding-top: 1rem;
   text-align: left;
 }
+
 .notFound404 {
   color: #cccccc78;
-  font-size: 10rem;
+  font-size: 4rem;
   text-align: center;
   margin: 2rem 0;
+}
+
+.verticalLine {
+  width: 1px;
+  background-color: var(--background-dark);
+  margin: 0 1rem;
+}
+ 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+}
+
+.loadingWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh; 
+}
+
+.loadingCircle {
+  width: 120px;
+  height: 120px;
+  border: 10px solid #c7c7c7; 
+  border-top: 10px solid var(--accent-color);
+  border-right: 10px solid var(--background-light);
+  border-bottom: 10px solid var(--background-dark);
+  border-left: 10px solid var(--primary-color); 
+  border-radius: 50%;
+  animation: ringSpin 1.5s linear infinite;
+}
+
+@keyframes ringSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
