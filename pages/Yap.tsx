@@ -4,6 +4,7 @@ import Hero from '../components/hero';
 import Header from '../components/header';
 import MyBarChart from '@/components/diagramme/BarChartParty';
 import PoliticianPodium from '@/components/diagramme/PoliticianPodium';
+import Heatmap from '@/components/diagramme/Heatmap';
 
 export default function Yap() {
   return (
@@ -15,6 +16,7 @@ export default function Yap() {
       <main>
         <MyBarChart />
         <PoliticianPodium />
+        <Heatmap />
       </main>
       <Footer />
     </div>
