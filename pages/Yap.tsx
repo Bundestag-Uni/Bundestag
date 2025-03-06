@@ -3,6 +3,7 @@ import Footer from '../components/footer';
 import Hero from '../components/hero';
 import Header from '../components/header';
 import MyBarChart from '@/components/diagramme/BarChartParty';
+import PoliticianPodium from '@/components/diagramme/PoliticianPodium';
 
 export default function Yap() {
   return (
@@ -13,6 +14,7 @@ export default function Yap() {
       <Navbar />
       <main>
         <MyBarChart />
+        <PoliticianPodium />
       </main>
       <Footer />
     </div>
