@@ -2,6 +2,7 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import Hero from '../components/hero';
 import Header from '../components/header';
+import MyBarChart from '@/components/diagramme/BarChartParty';
 
 export default function Yap() {
   return (
@@ -11,8 +12,7 @@ export default function Yap() {
       <Header />
       <Navbar />
       <main>
-        
-        <Hero/>
+        <MyBarChart />
       </main>
       <Footer />
     </div>
