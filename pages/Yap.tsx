@@ -11,7 +11,7 @@ export default function Yap() {
       <Header />
       <Navbar />
       <main>
-        <p>Das ist die Seite für Yap-o-Meter. Hier werden die Daten für den yapometer stehen.</p>
+        
         <Hero/>
       </main>
       <Footer />
