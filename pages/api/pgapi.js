@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { queryType, searchTerm } = req.body; 
+    const { queryType, searchTerm } = req.body;
     let queryText = '';
     let values = []; // Parameter-Array für parametrisierte Queries
 
@@ -102,7 +102,7 @@ export default async function handler(req, res) {
         `;
         values = [searchTerm];
         break;
-  
+
       case 'getPersonData':
         queryText = `
           SELECT
@@ -146,6 +146,33 @@ export default async function handler(req, res) {
         `;
         values = [searchTerm];
         break;
+
+      case 'getAllReden':
+        queryText = `
+          SELECT id, inhalt
+          FROM reden
+          ORDER BY id ASC
+          LIMIT 100
+        `;
+        break;
+
+      case 'getRedenWithMeta':
+        queryText = `
+            SELECT
+              r.id,
+              r.inhalt,
+              -- Datum ggf. formatieren, z.B. TO_CHAR(r.datum, 'YYYY-MM-DD') as datum,
+              r.datum,
+              a.vorname,
+              a.nachname,
+              a.partei_kurz
+            FROM reden r
+            JOIN abgeordnete a ON r.redner_id = a.id
+            ORDER BY r.id
+            LIMIT 100
+          `;
+        break;
+
 
       default:
         return res.status(400).json({ error: 'Invalid query type' });

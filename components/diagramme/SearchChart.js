@@ -6,9 +6,9 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from 'recharts';
+import styles from '../../styles/Home.module.css';
 
 export default function SearchChart() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,19 +19,19 @@ export default function SearchChart() {
 
     const item = payload[0].payload;
     return (
-      <div className="Home-module__g21JLG__bubble-tooltip">
+      <div className={styles.bubbleTooltip}>
         <p><strong>Jahr:</strong> {label}</p>
         <p><strong>Anzahl:</strong> {item.gesamt_count}</p>
       </div>
     );
   }
 
-  // Beim Laden der Komponente einmal "alles anzeigen"
+  // Load data on component mount
   useEffect(() => {
     handleSearch();
   }, []);
 
-  // Funktion, um die DB-Abfrage zu starten
+  // Function to fetch data from API
   const handleSearch = async () => {
     try {
       const response = await fetch('/api/pgapi', {
@@ -46,16 +46,15 @@ export default function SearchChart() {
         throw new Error(`Server error: ${response.status}`);
       }
 
-      // Antwort, z. B. [{ jahr: 2013, gesamt_count: "42" }, ...]
+      // Expecting response like [{ jahr: 2013, gesamt_count: "42" }, ...]
       const json = await response.json();
 
-      // 'gesamt_count' -> Number
       const parsedData = json.map((row) => ({
         jahr: Number(row.jahr),
         gesamt_count: Number(row.gesamt_count),
       }));
 
-      // Alle Jahre zwischen 2013 und 2024 auffüllen, damit 0-Werte erscheinen
+      // Fill in missing years between 2013 and 2024
       const startYear = 2013;
       const endYear = 2024;
       const fullData = [];
@@ -75,7 +74,7 @@ export default function SearchChart() {
     }
   };
 
-  // onKeyDown: wenn Enter gedrückt, handleSearch
+  // When Enter is pressed, run handleSearch
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       handleSearch();
@@ -83,27 +82,27 @@ export default function SearchChart() {
   };
 
   return (
-    <div className="Home-module__g21JLG__searchChartContainer">
-      {/* Eingabe + Button */}
-      <div className="Home-module__g21JLG__searchChartControls">
+    <div className={styles.searchChartContainer}>
+      {/* Search controls */}
+      <div className={styles.searchChartControls}>
         <input
-          className="Home-module__g21JLG__searchChartInput"
+          className={styles.searchChartInput}
           type="text"
           placeholder="Stichwort eingeben (oder leer für alle)"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={handleKeyDown}  // <--- Hier der Enter-Handler
+          onKeyDown={handleKeyDown}
         />
         <button
-          className="Home-module__g21JLG__searchChartButton"
+          className={styles.searchChartButton}
           onClick={handleSearch}
         >
           Suche
         </button>
       </div>
 
-      {/* Diagramm */}
-      <div className="Home-module__g21JLG__searchChartChart">
+      {/* Chart */}
+      <div className={styles.searchChartChart}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />

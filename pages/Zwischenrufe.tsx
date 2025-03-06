@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import Hero from '../components/hero';
@@ -7,64 +8,66 @@ import PersonenDiagrammRedner from '../components/p5-scripte/zwischenruferR';
 import ParteienDiagrammRufer from '../components/p5-scripte/parteienZ';
 import ParteienDiagrammRedner from '../components/p5-scripte/parteienR';
 import SearchChart from '../components/diagramme/SearchChart';
+import styles from '../styles/Home.module.css';
 
 export default function Zwischenrufe() {
   return (
     <div>
-      <title>Bundestagsscraper</title>
-      <meta
-        name="description"
-        content="A website inspired by the Bundestag displaying curated data."
-      />
+      <Head>
+        <title>Bundestagsscraper</title>
+        <meta
+          name="description"
+          content="A website inspired by the Bundestag displaying curated data."
+        />
+      </Head>
       <Header />
       <Navbar />
 
       <main>
-        <h1 className='Home-module__g21JLG__diagramquestion'>
+        <h1 className={styles.diagramquestion}>
           Wer ruft am meisten dazwischen?
         </h1>
 
-        <div className="Home-module__g21JLG__diagram-grid">
-          <div className="Home-module__g21JLG__grid-header">
+        <div className={styles.diagramGrid}>
+          <div className={styles.gridHeader}>
             <h2>Personen</h2>
           </div>
-          <div className="Home-module__g21JLG__grid-header">
+          <div className={styles.gridHeader}>
             <h2>Partei</h2>
           </div>
-          <div className="Home-module__g21JLG__grid-item">
+          <div className={styles.gridItem}>
             <PersonenDiagrammRufer />
           </div>
-          <div className="Home-module__g21JLG__grid-item">
+          <div className={styles.gridItem}>
             <ParteienDiagrammRufer />
           </div>
         </div>
 
-        <hr className="Home-module__g21JLG__spacer" />
+        <hr className={styles.spacer} />
 
-        <h1 className='Home-module__g21JLG__diagramquestion'>
+        <h1 className={styles.diagramquestion}>
           Bei wem wird am meisten dazwischen gerufen?
         </h1>
-        <div className="Home-module__g21JLG__diagram-grid">
-          <div className="Home-module__g21JLG__grid-header">
+        <div className={styles.diagramGrid}>
+          <div className={styles.gridHeader}>
             <h2>Personen</h2>
           </div>
-          <div className="Home-module__g21JLG__grid-header">
+          <div className={styles.gridHeader}>
             <h2>Partei</h2>
           </div>
-          <div className="Home-module__g21JLG__grid-item">
+          <div className={styles.gridItem}>
             <PersonenDiagrammRedner />
           </div>
-          <div className="Home-module__g21JLG__grid-item">
+          <div className={styles.gridItem}>
             <ParteienDiagrammRedner />
           </div>
         </div>
-        <hr className="Home-module__g21JLG__spacer" />
-        <h1 className='Home-module__g21JLG__diagramquestion'>Such selbst!</h1>
+        
+        <hr className={styles.spacer} />
+
+        <h1 className={styles.diagramquestion}>Such selbst!</h1>
         <SearchChart />
-        <hr
-          className="Home-module__g21JLG__spacer"
-          style={{ border: 'none' }}
-        />
+        <hr className={styles.spacer} style={{ border: 'none' }} />
       </main>
 
       <Footer />
