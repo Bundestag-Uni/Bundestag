@@ -1,0 +1,64 @@
+.gallery1 {
+    display: flex;
+    flex-direction: column;
+    flex-grow: inherit;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .btnGallery {
+    text-decoration: none;
+    color: #333;
+    display: inline-block;
+    margin-left: 1rem;
+    text-align: center;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 0.1rem;
+    padding: 0.1rem;
+  }
+  
+  .btnGallery:hover {
+    text-decoration: underline;
+  }
+  
+  .paragraph {
+    width: 100%;
+    padding: 0.25rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0.1rem;
+    padding: 0.1rem;
+    color: #999;
+  }
+  
+  .galleryContainer {
+    display: flex;
+    flex-direction: row;
+    margin-right: 80px;
+    margin-bottom: 48px;
+    margin-left: 80px;
+    padding-bottom: 150px;
+    min-width: 100%;
+  }
+  
+  .galleryHover:hover {
+    cursor: pointer;
+  }
+  
+  @media only screen and (max-width: 640px) {
+    .galleryContainer {
+      display: flex;
+      flex-direction: row;
+      margin-right: 80px;
+      margin-bottom: 48px;
+      margin-left: 80px;
+      padding-bottom: 150px;
+      min-width: 100%;
+    }
+  
+  }
+  
