@@ -2,6 +2,9 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import Hero from '../components/hero';
 import Header from '../components/header';
+import MyBarChart from '@/components/diagramme/BarChartParty';
+import PoliticianPodium from '@/components/diagramme/PoliticianPodium';
+import Heatmap from '@/components/diagramme/Heatmap';
 
 export default function Yap() {
   return (
@@ -11,8 +14,9 @@ export default function Yap() {
       <Header />
       <Navbar />
       <main>
-        <p>Das ist die Seite für Yap-o-Meter. Hier werden die Daten für den yapometer stehen.</p>
-        <Hero/>
+        <MyBarChart />
+        <PoliticianPodium />
+        <Heatmap />
       </main>
       <Footer />
     </div>
