@@ -155,7 +155,7 @@
 }
 
 .gridHeader {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-family: sans-serif;
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
@@ -165,6 +165,38 @@
   justify-content: center;
   align-items: center;
   border-radius: 20px;
+}
+
+.gridHeader2 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  /* background: var(--background-medium); */
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0 0.125rem 0.375rem var(--background-dark);
+  color: var(--accent-color);
+  margin: 30px 0;
+}
+
+.gridHeader3 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  /* background: var(--background-medium); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0 0.125rem 0.375rem var(--background-dark);
+  color: var(--accent-color);
+  margin: 35px 15;
 }
 
 .gridItem {
