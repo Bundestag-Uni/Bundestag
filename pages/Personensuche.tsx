@@ -124,11 +124,9 @@ export default function Personensuche() {
 
   // Button-Klick: Einen neuen zufälligen Zwischenruf auswählen & Rede laden
   function handleRandomZwischenruf() {
-    console.log(selectedPerson);
     if (selectedPerson && selectedPerson.zwischenrufe && selectedPerson.zwischenrufe.length > 0) {
       const randomIndex = Math.floor(Math.random() * selectedPerson.zwischenrufe.length);
       const chosenZwischenruf = selectedPerson.zwischenrufe[randomIndex];
-      console.log(chosenZwischenruf);
       setRandomZwischenruf(chosenZwischenruf);
       // Rede-ID verwenden, um die passende Rede zu laden
       fetchRedeFromZwischenruf(chosenZwischenruf.rede_id);
