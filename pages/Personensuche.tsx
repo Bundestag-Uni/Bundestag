@@ -283,15 +283,7 @@ export default function Personensuche() {
         {selectedPerson && (
           <div className={styles.layoutContainer}>
             {/* Linke Spalte: Visitenkarte */}
-            <div
-              className={styles.visitenkarte}
-              style={{
-                borderRadius: '8px',
-                overflow: 'hidden', // Damit das Bild und der Name nicht über den Rand hinausragen
-                boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-                padding: '1rem',
-              }}
-            >
+            <div className={styles.visitenkarte}>
               {/* Name als Überschrift */}
               <h1 className={styles.profilePictureCaption}>
                 {selectedPerson.anrede_titel} {selectedPerson.akad_titel}{' '}
@@ -375,15 +367,15 @@ export default function Personensuche() {
                   </div>
                 </div>
                 <div className={styles.smallinfobox}>
-                  <div className={styles.smallinfoboxLabel}>Inhalt:</div>
+                  <div className={styles.smallinfoboxLabel}>Inhalts-Ranking:</div>
                   <div className={styles.smallinfoboxCount}>
-                    0
+                    {selectedPerson.overall_rank || '---'}
                   </div>
                 </div>
                 <div className={styles.smallinfobox}>
-                  <div className={styles.smallinfoboxLabel}>Amount of Bitches:</div>
+                  <div className={styles.smallinfoboxLabel}>AVG Wörter/Rede:</div>
                   <div className={styles.smallinfoboxCount}>
-                    0
+                    {selectedPerson.avg_rede_length || '---'}
                   </div>
                 </div>
               </div>
