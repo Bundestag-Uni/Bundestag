@@ -157,6 +157,9 @@ export default async function handler(req, res) {
               FROM abgeordnete a
               WHERE a.id = $1;
           `;
+          values = [searchTerm];
+          break;
+
 
       case 'getRedeFromZwischenruf':
         queryText = `
