@@ -196,7 +196,93 @@ export default async function handler(req, res) {
             LIMIT 100
           `;
         break;
-
+        
+      case 'getEfficiencyTop5Person':
+        queryText = `            
+          SELECT 
+            a.vorname, 
+            a.nachname, 
+            a.partei_kurz,
+          AVG(re.efficiency)::numeric AS avg_efficiency
+          FROM abgeordnete a
+          JOIN reden r ON r.redner_id = a.id
+          JOIN reden_efficiency re ON re.id = r.id
+          GROUP BY a.id, a.vorname, a.nachname
+          ORDER BY avg_efficiency DESC
+          LIMIT 5;
+          `;
+        break;
+        
+      case 'getBestPartysEfficiency':
+        queryText = `
+        SELECT 
+          a.partei_kurz, 
+          AVG(re.efficiency)::numeric AS avg_efficiency
+        FROM abgeordnete a
+        JOIN reden r ON r.redner_id = a.id
+        JOIN reden_efficiency re ON re.id = r.id
+        GROUP BY a.partei_kurz
+        ORDER BY avg_efficiency DESC;
+          `;
+        break;
+        
+      case 'getEfficiencyWorst5Person':
+        queryText = `
+          SELECT 
+            a.vorname, 
+            a.nachname, 
+            a.partei_kurz,
+          AVG(re.efficiency)::numeric AS avg_efficiency
+          FROM abgeordnete a
+          JOIN reden r ON r.redner_id = a.id
+          JOIN reden_efficiency re ON re.id = r.id
+          GROUP BY a.id, a.vorname, a.nachname
+          ORDER BY avg_efficiency ASC
+          LIMIT 5;
+          `;
+        break;
+        
+      case 'getLongestRedenTop5Person':
+        queryText = `
+         SELECT
+          a.vorname,
+          a.nachname,
+          a.partei_kurz,
+          SUM(LENGTH(r.inhalt) - LENGTH(REPLACE(r.inhalt, ' ', '')) + 1) AS total_words
+        FROM abgeordnete a
+        JOIN reden r ON r.redner_id = a.id
+        GROUP BY a.id, a.vorname, a.nachname
+        ORDER BY total_words DESC
+        LIMIT 5;
+          `;
+        break;
+        
+      case 'getLongestRedenWorst5Person':
+        queryText = `
+        SELECT
+          a.vorname,
+          a.nachname,
+          a.partei_kurz,
+          SUM(LENGTH(r.inhalt) - LENGTH(REPLACE(r.inhalt, ' ', '')) + 1) AS total_words
+        FROM abgeordnete a
+        JOIN reden r ON r.redner_id = a.id
+        GROUP BY a.id, a.vorname, a.nachname
+        ORDER BY total_words ASC
+        LIMIT 5;
+          `;
+        break;
+        
+      case 'getBestPartysRedelenght':
+        queryText = `
+         SELECT
+          a.partei_kurz,
+        AVG(LENGTH(r.inhalt) - LENGTH(REPLACE(r.inhalt, ' ', '')) + 1) AS total_words
+        FROM abgeordnete a
+        JOIN reden r ON r.redner_id = a.id
+        GROUP BY a.partei_kurz
+        ORDER BY total_words DESC;
+          `;
+        break;
 
       default:
         return res.status(400).json({ error: 'Invalid query type' });
