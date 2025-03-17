@@ -23,14 +23,20 @@ export default function Yap() {
           <h1 className={styles.gridHeader2}>
             Welcher Politiker *x* am meisten?
           </h1>
-          <MyBarChart />
-          <PoliticianPodium />
+          <div className={styles.chartBox}>
+            <MyBarChart />
+          </div>
+          <div className={styles.chartBox}>
+            <PoliticianPodium />
+          </div>
         </div>
         <div >
           <h1 className={styles.gridHeader3}>
             Überblick über Parteieneffizienz
           </h1>
-          <Heatmap />
+          <div className={styles.chartBox}>
+            <Heatmap />
+          </div>  
         </div>
       </main>
       <Footer />

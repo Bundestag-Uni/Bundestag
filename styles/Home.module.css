@@ -199,6 +199,13 @@
   margin: 35px 15;
 }
 
+.chartBox {
+  border-radius: 20px;
+  box-shadow: 0 0.125rem 0.375rem var(--background-dark);
+  padding: 30px; 
+  margin-bottom: 30px ;
+}
+
 .gridItem {
   background: var(--background-light);
   padding: 15px;

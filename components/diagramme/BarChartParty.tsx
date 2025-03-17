@@ -1,9 +1,11 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const data = [
-  { name: 'Flutter', value: 85 },
-  { name: 'React Native', value: 70 },
-  { name: 'Swift', value: 60 }
+  { name: 'Olaf Scholz', value: 85 },
+  { name: 'ALice Weidel', value: 70 },
+  { name: 'Robert Habeck', value: 60 },
+  { name: 'Sarah Wagenknecht', value: 20 },
+  { name: 'Friedrich Merz', value: 20 }
 ];
 
 export default function MyBarChart() {
@@ -18,4 +20,3 @@ export default function MyBarChart() {
     </ResponsiveContainer>
   );
 }
-
