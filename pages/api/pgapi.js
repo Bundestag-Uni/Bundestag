@@ -102,7 +102,7 @@ export default async function handler(req, res) {
         `;
         values = [searchTerm];
         break;
-
+        
       case 'getPersonData':
         queryText = `
           SELECT
@@ -121,21 +121,45 @@ export default async function handler(req, res) {
             a.partei_kurz,
             (SELECT COUNT(*) FROM zwischenruf z WHERE z.zwischenrufer_id = a.id) AS zwischenrufe_count,
             (SELECT COUNT(*) FROM reden r WHERE r.redner_id = a.id) AS reden_count,
-            (
+             (
               SELECT ARRAY(
-                SELECT row_to_json(z)
-                FROM (
+                 SELECT row_to_json(z)
+                  FROM (
                   SELECT inhalt, rede_id
-                  FROM zwischenruf z
-                  WHERE z.zwischenrufer_id = a.id
-                ) z
-              )
-            ) AS zwischenrufe
-          FROM abgeordnete a
-          WHERE a.id = $1;
-        `;
-        values = [searchTerm];
-        break;
+                   FROM zwischenruf z
+                    WHERE z.zwischenrufer_id = a.id
+                 ) z
+                )
+              ) AS zwischenrufe,
+              (SELECT ROUND(AVG(LENGTH(inhalt) - LENGTH(REPLACE(inhalt, ' ', '')))::numeric, 2)
+               FROM reden
+               WHERE redner_id = a.id) AS avg_rede_length,
+              (
+                CASE 
+                  WHEN (SELECT COUNT(*) FROM reden r WHERE r.redner_id = a.id) = 0 THEN NULL
+                  ELSE (
+                    SELECT COUNT(*) + 1
+                    FROM (
+                      SELECT redner_id, AVG(efficiency)::numeric AS avg_eff
+                      FROM reden
+                      INNER JOIN reden_efficiency ON reden_efficiency.id = reden.id 
+                      GROUP BY redner_id
+                    ) AS sub
+                    WHERE sub.avg_eff > (
+                      SELECT AVG(efficiency)::numeric
+                      FROM reden
+                      INNER JOIN reden_efficiency ON reden_efficiency.id = reden.id 
+                      WHERE redner_id = a.id
+                    )
+                  )
+                END
+              ) AS overall_rank
+              FROM abgeordnete a
+              WHERE a.id = $1;
+          `;
+          values = [searchTerm];
+          break;
+
 
       case 'getRedeFromZwischenruf':
         queryText = `
@@ -172,7 +196,93 @@ export default async function handler(req, res) {
             LIMIT 100
           `;
         break;
-
+        
+      case 'getEfficiencyTop5Person':
+        queryText = `            
+          SELECT 
+            a.vorname, 
+            a.nachname, 
+            a.partei_kurz,
+          AVG(re.efficiency)::numeric AS avg_efficiency
+          FROM abgeordnete a
+          JOIN reden r ON r.redner_id = a.id
+          JOIN reden_efficiency re ON re.id = r.id
+          GROUP BY a.id, a.vorname, a.nachname
+          ORDER BY avg_efficiency DESC
+          LIMIT 5;
+          `;
+        break;
+        
+      case 'getBestPartysEfficiency':
+        queryText = `
+        SELECT 
+          a.partei_kurz, 
+          AVG(re.efficiency)::numeric AS avg_efficiency
+        FROM abgeordnete a
+        JOIN reden r ON r.redner_id = a.id
+        JOIN reden_efficiency re ON re.id = r.id
+        GROUP BY a.partei_kurz
+        ORDER BY avg_efficiency DESC;
+          `;
+        break;
+        
+      case 'getEfficiencyWorst5Person':
+        queryText = `
+          SELECT 
+            a.vorname, 
+            a.nachname, 
+            a.partei_kurz,
+          AVG(re.efficiency)::numeric AS avg_efficiency
+          FROM abgeordnete a
+          JOIN reden r ON r.redner_id = a.id
+          JOIN reden_efficiency re ON re.id = r.id
+          GROUP BY a.id, a.vorname, a.nachname
+          ORDER BY avg_efficiency ASC
+          LIMIT 5;
+          `;
+        break;
+        
+      case 'getLongestRedenTop5Person':
+        queryText = `
+         SELECT
+          a.vorname,
+          a.nachname,
+          a.partei_kurz,
+          SUM(LENGTH(r.inhalt) - LENGTH(REPLACE(r.inhalt, ' ', '')) + 1) AS total_words
+        FROM abgeordnete a
+        JOIN reden r ON r.redner_id = a.id
+        GROUP BY a.id, a.vorname, a.nachname
+        ORDER BY total_words DESC
+        LIMIT 5;
+          `;
+        break;
+        
+      case 'getLongestRedenWorst5Person':
+        queryText = `
+        SELECT
+          a.vorname,
+          a.nachname,
+          a.partei_kurz,
+          SUM(LENGTH(r.inhalt) - LENGTH(REPLACE(r.inhalt, ' ', '')) + 1) AS total_words
+        FROM abgeordnete a
+        JOIN reden r ON r.redner_id = a.id
+        GROUP BY a.id, a.vorname, a.nachname
+        ORDER BY total_words ASC
+        LIMIT 5;
+          `;
+        break;
+        
+      case 'getBestPartysRedelenght':
+        queryText = `
+         SELECT
+          a.partei_kurz,
+        AVG(LENGTH(r.inhalt) - LENGTH(REPLACE(r.inhalt, ' ', '')) + 1) AS total_words
+        FROM abgeordnete a
+        JOIN reden r ON r.redner_id = a.id
+        GROUP BY a.partei_kurz
+        ORDER BY total_words DESC;
+          `;
+        break;
 
       default:
         return res.status(400).json({ error: 'Invalid query type' });

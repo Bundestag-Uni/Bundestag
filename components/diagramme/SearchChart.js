@@ -86,7 +86,7 @@ export default function SearchChart() {
       {/* Search controls */}
       <div className={styles.searchChartControls}>
         <input
-          className={styles.searchChartInput}
+          className={styles.suchbar}
           type="text"
           placeholder="Stichwort eingeben (oder leer für alle)"
           value={searchTerm}
@@ -94,7 +94,7 @@ export default function SearchChart() {
           onKeyDown={handleKeyDown}
         />
         <button
-          className={styles.searchChartButton}
+          className={styles.searchButton}
           onClick={handleSearch}
         >
           Suche
@@ -109,7 +109,7 @@ export default function SearchChart() {
             <XAxis dataKey="jahr" />
             <YAxis type="number" domain={[0, 'dataMax']} />
             <Tooltip content={<CustomTooltip />} />
-            <Bar dataKey="gesamt_count" fill="#82ca9d" />
+            <Bar dataKey="gesamt_count" fill="rgba(173, 142, 2, 0.5)" />
           </BarChart>
         </ResponsiveContainer>
       </div>
