@@ -223,6 +223,7 @@ export default async function handler(req, res) {
         JOIN reden r ON r.redner_id = a.id
         JOIN reden_efficiency re ON re.id = r.id
         GROUP BY a.partei_kurz
+        HAVING COUNT(r.id) >= 500
         ORDER BY avg_efficiency DESC;
           `;
         break;
@@ -284,6 +285,7 @@ export default async function handler(req, res) {
         FROM abgeordnete a
         JOIN reden r ON r.redner_id = a.id
         GROUP BY a.partei_kurz
+        HAVING COUNT(r.id) >= 500
         ORDER BY total_words DESC;
           `;
         break;
