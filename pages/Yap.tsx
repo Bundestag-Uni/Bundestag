@@ -1,13 +1,18 @@
+import { useState } from 'react';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import Header from '../components/header';
 import MyBarChart from '@/components/diagramme/BarChartParty';
 import PoliticianPodium from '@/components/diagramme/PoliticianPodium';
 import Heatmap from '@/components/diagramme/Heatmap';
-import Dropdown from '@/components/DropdownPolitician'; // <-- Neue Dropdown-Komponente
+import DropdownPolitician from '@/components/DropdownPolitician'; 
+import DropdownParty from '@/components/DropdownParty';
 import styles from '../styles/Home.module.css';
 
 export default function Yap() {
+  const [partyQuery, setPartyQuery] = useState("getBestPartysEfficiency");
+  const [politicianQuery, setPoliticianQuery] = useState("getEfficiencyTop5Person");
+
   return (
     <div>
       <title>Bundestagsscraper</title>
@@ -17,22 +22,24 @@ export default function Yap() {
       <Navbar />
       <main>
         <div className={styles.diagramGrid}>
-          <h1 className={styles.gridHeader2}>
-            Welche Partei *x* am meisten?
-          </h1>
+          <div className={styles.gridHeader2}>
+            <h1>Parteien Ranking</h1>
+            <DropdownParty onSelect={(queryType) => setPartyQuery(queryType)} />
+          </div>
           <div className={styles.gridHeader2}>
             <h1 style={{ margin: 0 }}>
-              Welcher Politiker *x* am meisten?
+              Politiker Ranking
             </h1>
-            <Dropdown /> 
+            <DropdownPolitician onSelect={(queryType) => setPoliticianQuery(queryType)} />
           </div>
 
           <div className={styles.chartBox}>
-            <MyBarChart />
+            <MyBarChart queryType={partyQuery} />
           </div>
           <div className={styles.chartBox}>
-            <PoliticianPodium />
+            <PoliticianPodium queryType={politicianQuery} />
           </div>
+
         </div>
 
         <div>

@@ -43,7 +43,7 @@ export default function Dropdown({ onSelect }) {
           <div
             className={styles.dropdownItem}
             onClick={() =>
-              handleClickMenuItem("getEfficiencyTop5Person", "Effizientester Redner")
+              handleClickMenuItem("getBestPartysEfficiency", "Effizientester Redner")
             }
           >
             Effizientester Redner
@@ -51,26 +51,10 @@ export default function Dropdown({ onSelect }) {
           <div
             className={styles.dropdownItem}
             onClick={() =>
-              handleClickMenuItem("getEfficiencyWorst5Person", "Top Yapper")
-            }
-          >
-            Top Yapper
-          </div>
-          <div
-            className={styles.dropdownItem}
-            onClick={() =>
-              handleClickMenuItem("getLongestRedenTop5Person", "Längste Reden")
+              handleClickMenuItem("getBestPartysRedelenght", "Längste Reden")
             }
           >
             Längste Reden
-          </div>
-          <div
-            className={styles.dropdownItem}
-            onClick={() =>
-              handleClickMenuItem("getLongestRedenWorst5Person", "Kürzeste Reden")
-            }
-          >
-            Kürzeste Reden
           </div>
         </div>
       )}

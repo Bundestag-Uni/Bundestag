@@ -209,7 +209,7 @@ export default async function handler(req, res) {
           JOIN reden_efficiency re ON re.id = r.id
           GROUP BY a.id, a.vorname, a.nachname
           ORDER BY avg_efficiency DESC
-          LIMIT 5;
+          LIMIT 10;
           `;
         break;
         
@@ -222,7 +222,8 @@ export default async function handler(req, res) {
         JOIN reden r ON r.redner_id = a.id
         JOIN reden_efficiency re ON re.id = r.id
         GROUP BY a.partei_kurz
-        ORDER BY avg_efficiency DESC;
+        ORDER BY avg_efficiency DESC
+        LIMIT 5;
           `;
         break;
         
@@ -280,7 +281,8 @@ export default async function handler(req, res) {
         FROM abgeordnete a
         JOIN reden r ON r.redner_id = a.id
         GROUP BY a.partei_kurz
-        ORDER BY total_words DESC;
+        ORDER BY total_words DESC
+        LIMIT 5;
           `;
         break;
 
