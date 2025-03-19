@@ -210,7 +210,7 @@ export default async function handler(req, res) {
           GROUP BY a.id, a.vorname, a.nachname
           HAVING COUNT(r.id) >= 10
           ORDER BY avg_efficiency DESC
-          LIMIT 10;
+          LIMIT 20;
           `;
         break;
         
@@ -241,7 +241,7 @@ export default async function handler(req, res) {
           GROUP BY a.id, a.vorname, a.nachname
           HAVING COUNT(r.id) >= 10
           ORDER BY avg_efficiency ASC
-          LIMIT 5;
+          LIMIT 20;
           `;
         break;
         
@@ -257,7 +257,7 @@ export default async function handler(req, res) {
         GROUP BY a.id, a.vorname, a.nachname
         HAVING COUNT(r.id) >= 10
         ORDER BY total_words DESC
-        LIMIT 5;
+        LIMIT 20;
           `;
         break;
         
@@ -273,7 +273,7 @@ export default async function handler(req, res) {
         GROUP BY a.id, a.vorname, a.nachname
         HAVING COUNT(r.id) >= 10
         ORDER BY total_words ASC
-        LIMIT 5;
+        LIMIT 20;
           `;
         break;
         

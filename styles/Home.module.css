@@ -176,7 +176,7 @@
   align-items: center;
   border-radius: 20px;
   box-shadow: 0 0.125rem 0.375rem var(--background-dark);
-  margin: 30px 0 0 0;
+  margin: 30px 0 20px 0;
 }
 
 .gridHeader2 h1 {
@@ -205,7 +205,7 @@
   border-radius: 20px;
   box-shadow: 0 0.125rem 0.375rem var(--background-dark);
   padding: 30px; 
-  margin-bottom: 30px ;
+  margin-bottom: 40px ;
 }
 
 .gridItem {

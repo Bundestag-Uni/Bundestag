@@ -16,6 +16,10 @@ export default function BarChartParty({ queryType }) {
       case "CSU":                   return "#000000";
       case "BSW":                   return "#ff00ff";
       case "DSU":                   return "#0E4243";
+      case "SSW":                   return "#000088";
+      case "Die PARTEI":            return "#5E2028";
+      case "LKR":                   return "#FFA500";
+      case "Plos":                  return "#808080";
       default:                      return "#FFFFFF";
     }
   };
@@ -34,6 +38,16 @@ export default function BarChartParty({ queryType }) {
       value: item[valueKey],
       fill: getPartyColor(item.partei_kurz),
     };
+  }
+
+  function getDomainForQuery(queryType) {
+    if (queryType === "getBestPartysEfficiency") {
+      return [0.3, 0.4];
+    } else if (queryType === "getBestPartysRedelenght") {
+      return [480, 710];    
+    } else {
+      return [0, 100];
+    }
   }
   
 
@@ -63,11 +77,23 @@ export default function BarChartParty({ queryType }) {
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={data}>
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Bar dataKey="value" fill={({ payload }) => payload.fill} />
+      <BarChart data={data} margin={{ top: 20, right: 20, left: 40, bottom: 20 }}>
+      <defs>
+          <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+            <feDropShadow dx="2" dy="2" stdDeviation="3" floodColor="#444" floodOpacity="0.4" />
+          </filter>
+        </defs>
+
+        <XAxis dataKey="name" 
+          label= {{value: "Partei", position: "insideBottom", offset: -15, 
+            style:{fontWeight: "bold"} }}/>
+        <YAxis label= {{value: "Effizienz", position: "insideLeft", dx: -20, dy: 40, angle: -90,
+            style:{fontWeight: "bold"} }}
+            domain={getDomainForQuery(queryType)} />
+        <Tooltip formatter={(value, name, props) => {
+          const party = props.payload?.[0]?.payload?.party || "Unbekannt"; 
+          return [`${value} (Partei: ${party})`, "Effizienz"];}}/>
+        <Bar dataKey="value" fill={({ payload }) => payload.fill} radius={[8, 8, 0, 0]} style={{ filter: 'url(#shadow)' }} />
       </BarChart>
     </ResponsiveContainer>
   );

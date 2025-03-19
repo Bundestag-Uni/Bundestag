@@ -21,34 +21,23 @@ export default function Yap() {
       <Header />
       <Navbar />
       <main>
-        <div className={styles.diagramGrid}>
+        <div >
           <div className={styles.gridHeader2}>
             <h1>Parteien Ranking</h1>
             <DropdownParty onSelect={(queryType) => setPartyQuery(queryType)} />
           </div>
+          <div className={styles.chartBox}>
+            <MyBarChart queryType={partyQuery} />
+          </div>
+          
           <div className={styles.gridHeader2}>
             <h1 style={{ margin: 0 }}>
               Politiker Ranking
             </h1>
             <DropdownPolitician onSelect={(queryType) => setPoliticianQuery(queryType)} />
-          </div>
-
-          <div className={styles.chartBox}>
-            <MyBarChart queryType={partyQuery} />
-          </div>
-          <div className={styles.chartBox}>
+          </div>          <div className={styles.chartBox}>
             <PoliticianPodium queryType={politicianQuery} />
           </div>
-
-        </div>
-
-        <div>
-          <h1 className={styles.gridHeader3}>
-            Überblick über Parteieneffizienz
-          </h1>
-          <div className={styles.chartBox}>
-            <Heatmap />
-          </div>  
         </div>
       </main>
       <Footer />
