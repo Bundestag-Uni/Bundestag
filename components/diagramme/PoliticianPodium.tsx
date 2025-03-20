@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import styles from "../../styles/Home.module.css";
 
 export default function PoliticianPodium({ queryType }) {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getPartyColor = (party) => {
 
@@ -48,9 +50,9 @@ export default function PoliticianPodium({ queryType }) {
     } else if (queryType === "getEfficiencyWorst5Person") {
       return [0.17, 0.27];
     } else if (queryType === "getLongestRedenTop5Person") {
-      return [100000, 250000];
+      return [1080, 1550];
     } else if (queryType === "getLongestRedenWorst5Person") {
-      return [2500, 6500];    
+      return [198, 366];    
     } else {
       return [0, 100];
     }
@@ -61,15 +63,54 @@ export default function PoliticianPodium({ queryType }) {
       queryType === "getLongestRedenTop5Person" ||
       queryType === "getLongestRedenWorst5Person"
     ) {
-      return "Wörteranzahl";
+      return "Avg Wörteranzahl";
     }
     return "Effizienz";
+  }
+
+  function CustomTick(props) {
+    const { x, y, payload, textAnchor } = props;
+
+    const fragments = payload.value.split(/[\s-]+/);
+  
+    return (
+      <g transform={`translate(${x}, ${y + 10})`}>
+        <text textAnchor={textAnchor || "middle"} fill="#666">
+          {fragments.map((segment, index) => (
+            <tspan x="0" dy={index === 0 ? 0 : 14} key={index}>
+              {segment}
+            </tspan>
+          ))}
+        </text>
+      </g>
+    );
+  }
+
+  function CustomTooltip({ active, payload, label }) {
+    if (!active || !payload || !payload.length) {
+      return null;
+    }
+  
+    const { party, value } = payload[0].payload;
+  
+    return (
+      <div style={{
+        backgroundColor: "#fff",
+        border: "1px solid #ccc",
+        padding: "8px"
+      }}>
+        <p><strong>Name:</strong> {label}</p>
+        <p><strong>Effizienz:</strong> {value}</p>
+        <p><strong>Partei:</strong> {party}</p>
+      </div>
+    );
   }
   
 
   useEffect(() => {
     async function fetchData() {
       try {
+        setIsLoading(true); 
         const response = await fetch("/api/pgapi", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -80,16 +121,26 @@ export default function PoliticianPodium({ queryType }) {
         const formatted = result.map(mapRowToChartItem);
         setData(formatted);
       } catch (error) {
-        console.error("Fehler beim Abrufen der Daten:", error);
+        console.error("Fehler beim Abrufen:", error);
         setData([]);
+      } finally {
+        setIsLoading(false);
       }
     }
 
     fetchData();
   }, [queryType]);
 
+  if (isLoading) {
+    return (
+      <div className={styles.loadingWrapper}>
+        <div className={styles.loadingCircle}></div>
+      </div>
+    );
+  }
+
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={400}>
       <BarChart data={data} margin={{ top: 20, right: 20, left: 40, bottom: 20 }}>
         <defs>
           <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
@@ -97,17 +148,15 @@ export default function PoliticianPodium({ queryType }) {
           </filter>
         </defs>
 
-        <XAxis dataKey="name" 
-          label= {{value: "Politiker", position: "insideBottom", offset: -15, 
+        <XAxis dataKey="name" tick={<CustomTick />} interval={0}
+          label= {{value: "Politiker", position: "insideBottom", offset: -20, 
             style:{fontWeight: "bold"} }} 
         />
         <YAxis label= {{value: getYAxisLabel(queryType), position: "insideLeft", dx: -20, dy: 40, angle: -90,
             style:{fontWeight: "bold"} }} 
             domain={getDomainForQuery(queryType)} 
             />
-        <Tooltip formatter={(value, name, props) => {
-          const party = props.payload?.[0]?.payload?.party || "Unbekannt"; 
-          return [`${value} (Partei: ${party})`, "Effizienz"];}}
+        <Tooltip content={<CustomTooltip />}
           />
         <Bar dataKey="value" fill={({ payload }) => payload.fill} radius={[8, 8, 0, 0]} style={{ filter: 'url(#shadow)' }} />
       </BarChart>

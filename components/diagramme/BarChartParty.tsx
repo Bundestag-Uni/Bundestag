@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import styles from "../../styles/Home.module.css";
 
 export default function BarChartParty({ queryType }) {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getPartyColor = (party) => {
     switch (party) {
@@ -49,11 +51,39 @@ export default function BarChartParty({ queryType }) {
       return [0, 100];
     }
   }
+
+  function CustomTooltip({ active, payload, label }) {
+    if (!active || !payload || !payload.length) {
+      return null;
+    }
   
+    const { value } = payload[0].payload;
+  
+    return (
+      <div style={{
+        backgroundColor: "#fff",
+        border: "1px solid #ccc",
+        padding: "8px"
+      }}>
+        <p><strong>Name:</strong> {label}</p>
+        <p><strong>Effizienz:</strong> {value}</p>
+      </div>
+    );
+  }
+  
+  function getYAxisLabel(queryType) {
+    if (
+      queryType === "getBestPartysRedelenght" 
+    ) {
+      return "Avg Wörteranzahl";
+    }
+    return "Effizienz";
+  }
 
   useEffect(() => {
     async function fetchData() {
       try {
+        setIsLoading(true);
         const response = await fetch("/api/pgapi", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -61,11 +91,13 @@ export default function BarChartParty({ queryType }) {
         });
         const result = await response.json();
 
-        const formattedData = result.map(mapRowToChartItem);
-        setData(formattedData);
+        const formatted = result.map(mapRowToChartItem);
+        setData(formatted);
       } catch (error) {
-        console.error("Fehler beim Laden:", error);
+        console.error("Fehler beim Abrufen:", error);
         setData([]);
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -75,8 +107,16 @@ export default function BarChartParty({ queryType }) {
     }
   }, [queryType]);
 
+  if (isLoading) {
+    return (
+      <div className={styles.loadingWrapper}>
+        <div className={styles.loadingCircle}></div>
+      </div>
+    );
+  }
+
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={400}>
       <BarChart data={data} margin={{ top: 20, right: 20, left: 40, bottom: 20 }}>
       <defs>
           <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
@@ -87,12 +127,10 @@ export default function BarChartParty({ queryType }) {
         <XAxis dataKey="name" 
           label= {{value: "Partei", position: "insideBottom", offset: -15, 
             style:{fontWeight: "bold"} }}/>
-        <YAxis label= {{value: "Effizienz", position: "insideLeft", dx: -20, dy: 40, angle: -90,
+        <YAxis label= {{value: getYAxisLabel(queryType), position: "insideLeft", dx: -20, dy: 40, angle: -90,
             style:{fontWeight: "bold"} }}
             domain={getDomainForQuery(queryType)} />
-        <Tooltip formatter={(value, name, props) => {
-          const party = props.payload?.[0]?.payload?.party || "Unbekannt"; 
-          return [`${value} (Partei: ${party})`, "Effizienz"];}}/>
+        <Tooltip content={<CustomTooltip/>} />
         <Bar dataKey="value" fill={({ payload }) => payload.fill} radius={[8, 8, 0, 0]} style={{ filter: 'url(#shadow)' }} />
       </BarChart>
     </ResponsiveContainer>

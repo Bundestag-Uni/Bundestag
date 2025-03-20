@@ -251,7 +251,7 @@ export default async function handler(req, res) {
           a.vorname,
           a.nachname,
           a.partei_kurz,
-          SUM(LENGTH(r.inhalt) - LENGTH(REPLACE(r.inhalt, ' ', '')) + 1) AS total_words
+          AVG(LENGTH(r.inhalt) - LENGTH(REPLACE(r.inhalt, ' ', '')) + 1) AS total_words
         FROM abgeordnete a
         JOIN reden r ON r.redner_id = a.id
         GROUP BY a.id, a.vorname, a.nachname
@@ -267,7 +267,7 @@ export default async function handler(req, res) {
           a.vorname,
           a.nachname,
           a.partei_kurz,
-          SUM(LENGTH(r.inhalt) - LENGTH(REPLACE(r.inhalt, ' ', '')) + 1) AS total_words
+          AVG(LENGTH(r.inhalt) - LENGTH(REPLACE(r.inhalt, ' ', '')) + 1) AS total_words
         FROM abgeordnete a
         JOIN reden r ON r.redner_id = a.id
         GROUP BY a.id, a.vorname, a.nachname
