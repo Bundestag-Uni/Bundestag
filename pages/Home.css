@@ -51,7 +51,7 @@ html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: url('/images/bundestag-background.jpg') center/cover no-repeat;
+    background: url('../public/bundestag.jpg') center/cover no-repeat;
     position: relative;
     text-align: center;
     padding-top: 3rem;
