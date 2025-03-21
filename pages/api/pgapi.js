@@ -103,32 +103,32 @@ export default async function handler(req, res) {
         values = [searchTerm];
         break;
         
-      case 'getPersonData':
-        queryText = `
-          SELECT
-            a.id,
-            a.anrede_titel,
-            a.akad_titel,
-            a.vorname,
-            a.nachname,
-            to_char(a.geburtsdatum, 'DD.MM.YYYY') AS geburtsdatum,
-            to_char(a.sterbedatum, 'DD.MM.YYYY') AS sterbedatum,
-            a.geschlecht,
-            a.geburtsort,
-            a.familienstand,
-            a.religion,
-            a.beruf,
-            a.partei_kurz,
-            (SELECT COUNT(*) FROM zwischenruf z WHERE z.zwischenrufer_id = a.id) AS zwischenrufe_count,
-            (SELECT COUNT(*) FROM reden r WHERE r.redner_id = a.id) AS reden_count,
-             (
-              SELECT ARRAY(
-                 SELECT row_to_json(z)
+        case 'getPersonData':
+          queryText = `
+            SELECT
+              a.id,
+              a.anrede_titel,
+              a.akad_titel,
+              a.vorname,
+              a.nachname,
+              to_char(a.geburtsdatum, 'DD.MM.YYYY') AS geburtsdatum,
+              to_char(a.sterbedatum, 'DD.MM.YYYY') AS sterbedatum,
+              a.geschlecht,
+              a.geburtsort,
+              a.familienstand,
+              a.religion,
+              a.beruf,
+              a.partei_kurz,
+              (SELECT COUNT(*) FROM zwischenruf z WHERE z.zwischenrufer_id = a.id) AS zwischenrufe_count,
+              (SELECT COUNT(*) FROM reden r WHERE r.redner_id = a.id) AS reden_count,
+              (
+                SELECT ARRAY(
+                  SELECT row_to_json(z)
                   FROM (
-                  SELECT inhalt, rede_id
-                   FROM zwischenruf z
+                    SELECT inhalt, rede_id
+                    FROM zwischenruf z
                     WHERE z.zwischenrufer_id = a.id
-                 ) z
+                  ) z
                 )
               ) AS zwischenrufe,
               (SELECT ROUND(AVG(LENGTH(inhalt) - LENGTH(REPLACE(inhalt, ' ', '')))::numeric, 2)
@@ -136,7 +136,7 @@ export default async function handler(req, res) {
                WHERE redner_id = a.id) AS avg_rede_length,
               (
                 CASE 
-                  WHEN (SELECT COUNT(*) FROM reden r WHERE r.redner_id = a.id) = 0 THEN NULL
+                  WHEN (SELECT COUNT(*) FROM reden r WHERE r.redner_id = a.id) <= 10 THEN NULL
                   ELSE (
                     SELECT COUNT(*) + 1
                     FROM (
@@ -144,6 +144,7 @@ export default async function handler(req, res) {
                       FROM reden
                       INNER JOIN reden_efficiency ON reden_efficiency.id = reden.id 
                       GROUP BY redner_id
+                      HAVING COUNT(*) > 10
                     ) AS sub
                     WHERE sub.avg_eff > (
                       SELECT AVG(efficiency)::numeric
@@ -154,8 +155,8 @@ export default async function handler(req, res) {
                   )
                 END
               ) AS overall_rank
-              FROM abgeordnete a
-              WHERE a.id = $1;
+            FROM abgeordnete a
+            WHERE a.id = $1;
           `;
           values = [searchTerm];
           break;

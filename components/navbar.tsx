@@ -10,11 +10,10 @@ export default function Navbar() {
       <ul className={styles.navLinks}>
         {[
           { href: "/", label: "Home" },
-          { href: "/Personensuche", label: "Personensuche" },
           { href: "/Yap", label: "Yap-o-Meter" },
           { href: "/Zwischenrufe", label: "Zwischenrufe" },
+          { href: "/Personensuche", label: "Personensuche" },
           { href: "/Methodik", label: "Methodik" },
-          { href: "/Reden", label: "Reden" },
         ].map(({ href, label }) => (
           <li key={href}>
             <Link href={href} className={router.pathname === href ? styles.activeLink : ""}>
