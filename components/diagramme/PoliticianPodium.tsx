@@ -75,7 +75,7 @@ export default function PoliticianPodium({ queryType }) {
   
     return (
       <g transform={`translate(${x}, ${y + 10})`}>
-        <text textAnchor={textAnchor || "middle"} fill="#666">
+        <text textAnchor={textAnchor || "middle"} fill="#666" fontSize="12px">
           {fragments.map((segment, index) => (
             <tspan x="0" dy={index === 0 ? 0 : 14} key={index}>
               {segment}
