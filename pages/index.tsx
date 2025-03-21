@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import './Home.css';
 import Navbar from '@/components/navbar';
+import '../styles/home.css';
 
 export default function Home() {
 
   useEffect(() => {
-    // IntersectionObserver, um Timeline-Events beim Scrollen zu animieren
+
     const timelineEvents = document.querySelectorAll('.timeline-event');
     const observer = new IntersectionObserver(
       (entries) => {
@@ -26,27 +26,15 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="home-container">
-      {/* Navigation oder Header, wenn gewünscht */}
-      {/*  <nav className="navbar">
-        <ul>
-          <li><a href="#start">Start</a></li>
-          <li><a href="#timeline">Timeline</a></li>
-          <li><a href="#contact">Kontakt</a></li>
-        </ul>
-      </nav> */}
+    <div className="homeContainer">
       <Navbar />
-      {/* Hero-Section oder einfach nur Überschrift */}
       <header className="hero">
         <h1>Bundestag-Scraper</h1>
         <p>Spannende Fakten & Daten aus dem Bundestag</p>
       </header>
-
-      {/* Timeline-Bereich */}
-      <section id="timeline" className="timeline-container">
+      <section className="timeline-container">
         <div className="timeline-line"></div>
 
-        {/* Beispiel-Events (links/rechts) */}
         <div className="timeline-event left">
           <div className="timeline-content">
             <span className="year">Personensuche</span>
@@ -85,15 +73,10 @@ export default function Home() {
         <div className="timeline-event right">
           <div className="timeline-content">
             <span className="date">Nvidia A40 48GB</span>
-            <p>dieses Beast hat uns bei der Brechnung unterstützt</p>
+            <p>dieses Beast hat uns bei der Berechnung unterstützt</p>
           </div>
         </div>
-
-        {/* ...weitere Timeline-Events nach Bedarf */}
       </section>
-      {/* Rechenzeuit 1 Monat */}
-      {/* 60.000 Reden */}
-      {/* Footer oder sonstige Inhalte */}
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} Bundestag-Scraper</p>
       </footer>
