@@ -19,7 +19,7 @@ In this project we use the API provided by the Bundestag to get speech data and 
 First, run the development server:
 
 ```bash
-npm install dev
+npm install
 sudo docker compose up --build
 ```
 
